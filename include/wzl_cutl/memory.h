@@ -1,8 +1,8 @@
 #ifndef WZL_CUTL_MEMORY_H
 #define WZL_CUTL_MEMORY_H
 
+#include <stddef.h>
 #include "wzl_cutl/libexport.h"
-#include "wzl_cutl/types.h"
 
 // Struct: wzl_memory_delegates
 // Struct holding function pointers which may supply
@@ -11,19 +11,19 @@ typedef struct wzl_memory_delegates
 {
 	// Property: malloc_func
 	// Pointer to function to be called instead of system malloc().
-	wzl_voidptr (*malloc_func)(wzl_size size);
+	void* (*malloc_func)(size_t size);
 
 	// Property: free_func
 	// Pointer to function to be called instead of system free().
-	wzl_void (*free_func)(wzl_voidptr ptr);
+	void (*free_func)(void* ptr);
 
 	// Pointer: callc_func
 	// Pointer to function to be called instead of system calloc().
-	wzl_voidptr (*calloc_func)(wzl_size num, wzl_size size);
+	void* (*calloc_func)(size_t num, size_t size);
 
 	// Pointer: realloc_func
 	// Pointer to function to be called instead of system realloc().
-	wzl_voidptr (*realloc_func)(wzl_voidptr ptr, wzl_size size);
+	void* (*realloc_func)(void* ptr, size_t size);
 } wzl_memory_delegates;
 
 // Function: wzl_set_memory_delegates
@@ -48,6 +48,6 @@ typedef struct wzl_memory_delegates
 // Note:
 //
 //   This function is not thread-safe.
-WZL_CUTL_PUBLIC(wzl_void) wzl_set_memory_delegates(wzl_memory_delegates delegates);
+WZL_CUTL_PUBLIC(void) wzl_set_memory_delegates(wzl_memory_delegates delegates);
 
 #endif  // WZL_CUTL_MEMORY_H
