@@ -40,5 +40,5 @@ const char* wzl_get_last_library_error(void)
 
 void* wzl_get_library_symbol(void* handle, const char* symbol)
 {
-	return GetProcAddress(handle, symbol);
+	return (void*)GetProcAddress(handle, symbol);
 }
