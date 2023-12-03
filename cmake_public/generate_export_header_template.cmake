@@ -1,6 +1,7 @@
+# TODO: Properly document
 function(generate_export_header_template)
 	set(options STATIC SHARED)
-	set(oneValueArgs TARGET OUTPUT IS_STATIC PRODUCER_DEFINE)
+	set(oneValueArgs TARGET OUTPUT PRODUCER_DEFINE)
 	set(multiValueArgs "")
 
 	cmake_parse_arguments(EXPORTHEADER "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
