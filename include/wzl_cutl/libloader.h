@@ -51,15 +51,51 @@ bool wzl_unload_library(void* handle);
 //   Human-readable string describing the last error.
 const char* wzl_get_last_library_error(void);
 
+// Function: wzl_get_library_symbol
+// Returns a pointer to the symbol with the specified
+// name within the specified library.
+//
+// If the function is not able to be looked up, NULL
+// is returned. <wzl_get_last_library_error> can be used
+// to fetch a string describing the error that occurred.
+//
+// Note:
+//
+//   If compiling with -pedantic, the compiler may warn about
+//   casting the return value of this function to a function
+//   pointer. There is no canonical way of avoiding this,
+//   other than suppressing the -pedantic diagnostic for the
+//   cast. <wzl_get_library_function> is a convenience
+//   function that will do this for you.
+//
+// Parameters:
+//
+//   handle - Handle to the library which holds the symbol.
+//   name   - Name of the symbol to look up.
+//
+// Returns:
+//
+//   Pointer to the requested symbol, or NULL if it could not
+//   be obtained.
 void* wzl_get_library_symbol(void* handle, const char* symbol);
 
 // Function: wzl_get_library_function
 // Returns a pointer to the function with the specified
 // name within the specified library.
 //
-// If the function is not able to be looked up, NULL
-// is returned. <wzl_get_last_library_error> can be used
-// to fetch a string describing the error that occurred.
+// If compiling with -pedantic, the compiler may warn about
+// casting a void* pointer to a function pointer. There is
+// no canonical way of avoiding this, other than suppressing
+// the -pedantic diagnostic for the cast. This function wraps
+// the diagnostic suppression, for convenience; in all other
+// respects, it behaves identically to <wzl_get_library_symbol>.
+//
+// Note:
+//
+//   The return value of this function is simply a function
+//   pointer that returns void and takes no arguments.
+//   It is expected that the caller casts this function
+//   pointer to the intended signature.
 //
 // Parameters:
 //

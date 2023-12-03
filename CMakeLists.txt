@@ -9,7 +9,7 @@ LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_public")
 project(wzl-cutl LANGUAGES C CXX)
 
 option(BUILD_SHARED_LIBS "If set, builds a shared library. If not set, builds a static library." FALSE)
-option(COMPILE_WARNING_AS_ERROR "If set, any compiler warnings are treated as errors." TRUE)
+option(CMAKE_COMPILE_WARNING_AS_ERROR "If set, any compiler warnings are treated as errors." TRUE)
 option(WZL_CUTL_INSTALL "If set, and the project is a top-level project, generates an install target for the library." FALSE)
 
 set(GENERATED_HEADER_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated_headers")
@@ -48,6 +48,8 @@ add_library(wzl-cutl
 	src/wzl_cutl_/common/memory/memory_impl.c
 	src/wzl_cutl_/common/string/string_impl.c
 
+	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/libloader/libloader_impl.c>
+
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/libloader/libloader_impl.c>
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/winapi_min.h>
 )
@@ -66,6 +68,9 @@ elseif(COMPILER_IS_CLANG OR COMPILER_IS_GNU)
 		-Wall
 		-Wextra
 		-pedantic
+	)
+	target_link_options(wzl-cutl PRIVATE
+		-Wl,--no-undefined
 	)
 else()
 	message(FATAL_ERROR "Unsupported compiler")
