@@ -39,6 +39,7 @@ generate_export_header_template(
 add_library(wzl-cutl
 	${GENERATED_EXPORT_HEADER}
 
+	include/wzl_cutl/filesystem.h
 	include/wzl_cutl/libloader.h
 	include/wzl_cutl/memory.h
 	include/wzl_cutl/platform_defs.h
@@ -50,6 +51,7 @@ add_library(wzl-cutl
 
 	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/libloader/libloader_impl.c>
 
+	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/filesystem/filesystem_impl.c>
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/libloader/libloader_impl.c>
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/winapi_min.h>
 )
