@@ -10,6 +10,9 @@
 // Function: wzl_file_exists
 // Returns whether a file exists at the specified path.
 //
+// If relative, the path is evaluated relative to the
+// current working directory.
+//
 // Note:
 //
 //   Beware that the status of a file may change between this
@@ -32,6 +35,9 @@ WZL_CUTL_PUBLIC(bool) wzl_file_exists(const char* native_path);
 
 // Function: wzl_directory_exists
 // Returns whether a directory exists at the specified path.
+//
+// If relative, the path is evaluated relative to the
+// current working directory.
 //
 // Note:
 //
