@@ -1,3 +1,8 @@
+// File: memory.h
+// Allows the library user to override the library's built-in
+// dynamic memory functions, in case the user wishes to use
+// their own memory management system.
+
 #ifndef WZL_CUTL_MEMORY_H
 #define WZL_CUTL_MEMORY_H
 
@@ -47,7 +52,7 @@ typedef struct wzl_memory_delegates
 //
 // Note:
 //
-//   This function is not thread-safe.
+//   This function is not thread-safe or re-entrant.
 WZL_CUTL_PUBLIC(void) wzl_set_memory_delegates(wzl_memory_delegates delegates);
 
 #endif  // WZL_CUTL_MEMORY_H

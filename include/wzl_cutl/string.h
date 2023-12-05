@@ -1,3 +1,6 @@
+// File: string.h
+// Defines functions that manipulate strings.
+
 #ifndef WZL_CUTL_STRING_H
 #define WZL_CUTL_STRING_H
 
@@ -6,7 +9,7 @@
 // Function: wzl_duplicate_string
 // Given an input string, makes a dynamic copy of this string
 // and returns it. Memory is allocated according to the
-// currently set memory delegates.
+// currently set memory delegates (see <memory.h>).
 //
 // The caller takes ownership of the allocated string.
 // The string must be freed after use to avoid creating

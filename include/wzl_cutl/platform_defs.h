@@ -1,3 +1,7 @@
+// File: platform_defs.h
+// Defines helper definitions and macros for checking
+// certain attributes of the current platform.
+
 #ifndef WZL_CUTL_PLATFORM_DEFS_H
 #define WZL_CUTL_PLATFORM_DEFS_H
 

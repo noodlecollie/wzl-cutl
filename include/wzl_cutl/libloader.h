@@ -1,3 +1,7 @@
+// File: libloader.h
+// Defines functions that may be used to load libraries
+// dynamically on a system.
+
 #ifndef WZL_CUTL_LIBLOADER_H
 #define WZL_CUTL_LIBLOADER_H
 

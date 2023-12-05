@@ -1,4 +1,24 @@
-# TODO: Properly document
+# Function: generate_export_header_template
+# Generates a C/C++ header suitable for exporting symbols from
+# shared or static libraries.
+#
+# See export_header_template.in for the structure that the
+# exported header will follow.
+#
+# Parameters:
+#
+#   STATIC          - Set this if the target is a static library.
+#   SHARED          - Set this if the target is a shared library.
+#   TARGET          - Name of the target to generate the header for.
+#   OUTPUT          - Output file where the header will be written.
+#   PRODUCER_DEFINE - Preprocessor definition that distinguishes whether
+#                     the target is being produced in the current build.
+#                     This is expected to correspond to a private
+#                     definition that is set separately on the target
+#                     by the caller. If this definition is defined,
+#                     the header facilitates marking symbols as
+#                     dllexport on Windows; if it is not defined, the
+#                     header marks these symbols as dllimport.
 function(generate_export_header_template)
 	set(options STATIC SHARED)
 	set(oneValueArgs TARGET OUTPUT PRODUCER_DEFINE)
