@@ -41,6 +41,7 @@ add_library(wzl-cutl
 
 	include/wzl_cutl/filesystem.h
 	include/wzl_cutl/libloader.h
+	include/wzl_cutl/math.h
 	include/wzl_cutl/memory.h
 	include/wzl_cutl/platform_defs.h
 	include/wzl_cutl/string.h
