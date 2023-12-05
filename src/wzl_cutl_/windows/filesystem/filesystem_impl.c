@@ -1,5 +1,13 @@
+#include <stdlib.h>
+#include <string.h>
 #include "wzl_cutl/filesystem.h"
 #include "wzl_cutl_/windows/winapi_min.h"
+#include <direct.h>
+
+WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
+{
+	return _getcwd(buffer, buffer_size < INT_MAX ? (int)buffer_size : INT_MAX);
+}
 
 WZL_CUTL_PUBLIC(bool) wzl_file_exists(const char* native_path)
 {

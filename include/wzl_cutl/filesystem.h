@@ -7,6 +7,25 @@
 #include <stdbool.h>
 #include "wzl_cutl/libexport.h"
 
+// Function: wzl_get_cwd
+// Copies the absolute path of the current working directory
+// into the provided buffer. The buffer is always terminated.
+//
+// If the buffer is null, an allocated buffer is returned
+// that is at least buffer_size characters in length. This
+// allocated buffer must be freed later by the caller.
+//
+// Parameters:
+//
+//   buffer      - Buffer to copy into.
+//   buffer_size - Size of the buffer, including the null terminator.
+//
+// Returns:
+//
+//   NULL if a valid buffer pointer was passed to the function, or
+//   an allocated buffer if NULL was passed instead.
+WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size);
+
 // Function: wzl_file_exists
 // Returns whether a file exists at the specified path.
 //

@@ -8,6 +8,9 @@ LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_public")
 
 project(wzl-cutl LANGUAGES C CXX)
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED YES)
+
 option(BUILD_SHARED_LIBS "If set, builds a shared library. If not set, builds a static library." FALSE)
 option(CMAKE_COMPILE_WARNING_AS_ERROR "If set, any compiler warnings are treated as errors." TRUE)
 option(WZL_CUTL_INSTALL "If set, and the project is a top-level project, generates an install target for the library." FALSE)
@@ -50,6 +53,7 @@ add_library(wzl-cutl
 	src/wzl_cutl_/common/memory/memory_impl.c
 	src/wzl_cutl_/common/string/string_impl.c
 
+	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/filesystem/filesystem_impl.c>
 	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/libloader/libloader_impl.c>
 
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/filesystem/filesystem_impl.c>
