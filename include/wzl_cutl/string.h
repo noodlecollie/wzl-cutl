@@ -7,7 +7,7 @@
 #include <stdarg.h>
 #include "wzl_cutl/libexport.h"
 
-// Function: wzl_duplicate_string
+// Function: wzl_strdup
 // Given an input string, makes a dynamic copy of this string
 // and returns it. Memory is allocated according to the
 // currently set memory delegates (see <memory.h>).
@@ -27,6 +27,6 @@
 //
 //   Pointer to allocated memory for the duplicated
 //   string, or NULL if the input string was NULL.
-WZL_CUTL_PUBLIC(char*) wzl_duplicate_string(const char* str);
+WZL_CUTL_PUBLIC(char*) wzl_strdup(const char* str);
 
 #endif  // WZL_CUTL_STRING_H

@@ -10,7 +10,7 @@ wzl-cutl
 There are a few things that `wzl-cutl` specifically avoids:
 
 * Re-implementing functions which are available in the C standard, up to and including C11.
-  * It does, however, implement some POSIX functions where these functions may be missing, or named differently, between Windows and Linux. Wherever possible, these functions are written to simply call into the system's implementation.
+  * It does, however, implement some C annex or POSIX functions where these functions may be missing, or named differently, between Windows and Linux. Wherever possible, these functions are written to simply call into the system's implementation.
 * Re-implementing functions that are already available in existing third party C libraries. For a list of libraries which provide useful functionality, see the [Useful Libraries](#useful-libraries) section.
 
 ## Useful Libraries
@@ -20,6 +20,7 @@ There are a few things that `wzl-cutl` specifically avoids:
 * [SPString](https://github.com/NJdevPro/SPString): Secure C string library for embedded systems
 * [sds](https://github.com/antirez/sds): Dynamic string library for C
 * [safestringlib](https://github.com/intel/safestringlib): Secure string library implementation by Intel
+* [safeclib](https://github.com/rurban/safeclib): Safe libc extension implementation
 * [nanoprintf](https://github.com/charlesnicholson/nanoprintf): Extremely lightweight `printf` implementation for embedded systems
 
 ### Filesystem and Paths

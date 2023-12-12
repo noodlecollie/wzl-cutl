@@ -4,7 +4,7 @@
 #include "wzl_cutl/math.h"
 #include "wzl_cutl_/common/memory/memory_impl.h"
 
-WZL_CUTL_PUBLIC(char*) wzl_duplicate_string(const char* str)
+WZL_CUTL_PUBLIC(char*) wzl_strdup(const char* str)
 {
 	if ( !str )
 	{
