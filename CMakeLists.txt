@@ -10,6 +10,7 @@ project(wzl-cutl LANGUAGES C CXX)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED YES)
+set(CMAKE_POSITION_INDEPENDENT_CODE YES)
 
 option(BUILD_SHARED_LIBS "If set, builds a shared library. If not set, builds a static library." FALSE)
 option(CMAKE_COMPILE_WARNING_AS_ERROR "If set, any compiler warnings are treated as errors." TRUE)
