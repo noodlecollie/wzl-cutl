@@ -25,3 +25,29 @@ WZL_CUTL_PUBLIC(char*) wzl_strdup(const char* str)
 
 	return out;
 }
+
+WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const char* restrict src)
+{
+	if ( !dest || destSize < 1 )
+	{
+		return 0;
+	}
+
+	if ( !src )
+	{
+		dest[0] = '\0';
+		return 0;
+	}
+
+	char* restrict cursor = dest;
+
+	while ( *src && destSize > 1 )
+	{
+		*(cursor++) = *(src++);
+		--destSize;
+	}
+
+	*cursor = '\0';
+
+	return cursor - dest;
+}
