@@ -16,11 +16,12 @@ const char* wzl_get_last_library_error(void)
 {
 	static char error_buffer[512];
 
+	error_buffer[0] = '\0';
+
 	DWORD error_id = GetLastError();
 
 	if ( error_id == 0 )
 	{
-		error_buffer[0] = '\0';
 		return error_buffer;
 	}
 
@@ -34,7 +35,7 @@ const char* wzl_get_last_library_error(void)
 		NULL
 	);
 
-	error_buffer[sizeof(error_buffer - 1)] = '\0';
+	error_buffer[sizeof(error_buffer) - 1] = '\0';
 	return error_buffer;
 }
 
