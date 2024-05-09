@@ -6,6 +6,8 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+#include <string.h>
+#include <stdbool.h>
 #include "wzl_cutl/libexport.h"
 
 // Function: wzl_strdup
@@ -83,6 +85,83 @@ WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const c
 //   Number of characters written, excluding the null terminator,
 //   or a negative value if an error occurs.
 WZL_CUTL_PUBLIC(int) wzl_vsprintf(char* buffer, size_t bufferSize, const char* format, va_list argptr);
+
+// Function: wzl_strequals
+// Performs a case-sensitive comparison between two strings.
+//
+// Note
+//
+//   A null string is never considered equal to a non-null string.
+//   Two null strings are always considered equal.
+//
+// Parameters:
+//
+//   a - First string to compare.
+//   b - Second string to compare.
+//
+// Returns:
+//
+//   True if strings are considered equal, or false otherwise.
+WZL_CUTL_PUBLIC(bool) wzl_strequals(const char* a, const char* b);
+
+// Function: wzl_strnequals
+// Performs a case-sensitive comparison between two strings,
+// with a maximum number of characters to compare.
+//
+// Note
+//
+//   A null string is never considered equal to a non-null string.
+//   Two null strings are always considered equal.
+//
+// Parameters:
+//
+//   a     - First string to compare.
+//   b     - Second string to compare.
+//   count - Maximum number of characters to compare.
+//
+// Returns:
+//
+//   True if strings are considered equal, or false otherwise.
+WZL_CUTL_PUBLIC(bool) wzl_strnequals(const char* a, const char* b, size_t count);
+
+// Function: wzl_strequali
+// Performs a case-insensitive comparison between two strings.
+//
+// Note
+//
+//   A null string is never considered equal to a non-null string.
+//   Two null strings are always considered equal.
+//
+// Parameters:
+//
+//   a - First string to compare.
+//   b - Second string to compare.
+//
+// Returns:
+//
+//   True if strings are considered equal, or false otherwise.
+WZL_CUTL_PUBLIC(bool) wzl_strequali(const char* a, const char* b);
+
+
+// Function: wzl_strnequali
+// Performs a case-insensitive comparison between two strings,
+// with a maximum number of characters to compare.
+//
+// Note
+//
+//   A null string is never considered equal to a non-null string.
+//   Two null strings are always considered equal.
+//
+// Parameters:
+//
+//   a     - First string to compare.
+//   b     - Second string to compare.
+//   count - Maximum number of characters to compare.
+//
+// Returns:
+//
+//   True if strings are considered equal, or false otherwise.
+WZL_CUTL_PUBLIC(bool) wzl_strnequali(const char* a, const char* b, size_t count);
 
 // Function: wzl_sprintf
 // Safer version of the standard library sprintf function,
