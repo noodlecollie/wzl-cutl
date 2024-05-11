@@ -71,7 +71,7 @@ WZL_CUTL_PUBLIC(bool) wzl_strequali(const char* a, const char* b)
 	return strcasecmp(a, b) == 0;
 }
 
-WZL_CUTL_PUBLIC(bool) wzl_strnequali(const char* a, const char* b)
+WZL_CUTL_PUBLIC(bool) wzl_strnequali(const char* a, const char* b, size_t count)
 {
 	if ( a == b )
 	{
@@ -83,5 +83,5 @@ WZL_CUTL_PUBLIC(bool) wzl_strnequali(const char* a, const char* b)
 		return false;
 	}
 
-	return strncasecmp(a, b) == 0;
+	return strncasecmp(a, b, count) == 0;
 }
