@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "wzl_cutl/string.h"
 #include "wzl_cutl/math.h"
 #include "wzl_cutl_/common/memory/memory_impl.h"
@@ -50,4 +51,74 @@ WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const c
 	*cursor = '\0';
 
 	return cursor - dest;
+}
+
+WZL_CUTL_PUBLIC(bool) wzl_strtrimspace(const char* str, const char** begin, const char** end)
+{
+	if ( !str )
+	{
+		if ( begin )
+		{
+			*begin = NULL;
+		}
+
+		if ( end )
+		{
+			*end = NULL;
+		}
+
+		return false;
+	}
+
+	if ( !(*str) )
+	{
+		if ( begin )
+		{
+			*begin = str;
+		}
+
+		if ( end )
+		{
+			*end = str;
+		}
+
+		return false;
+	}
+
+	bool trimmed = false;
+	const char* tempBegin = NULL;
+	const char* tempEnd = NULL;
+
+	const char* cursor = str;
+
+	while ( *cursor )
+	{
+		if ( isspace(*cursor) )
+		{
+			trimmed = true;
+		}
+		else
+		{
+			if ( !tempBegin )
+			{
+				tempBegin = cursor;
+			}
+
+			tempEnd = cursor;
+		}
+
+		++cursor;
+	}
+
+	if ( begin )
+	{
+		*begin = tempBegin ? tempBegin : cursor;
+	}
+
+	if ( end )
+	{
+		*end = tempEnd ? (tempEnd + 1) : cursor;
+	}
+
+	return trimmed;
 }
