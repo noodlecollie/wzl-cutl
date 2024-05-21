@@ -8,7 +8,7 @@ WZL_CUTL_PUBLIC(int) wzl_vsprintf(char* buffer, size_t numberOfElements, const c
 
 	if ( buffer && numberOfElements > 0 )
 	{
-		if ( returnVal >= 0 )
+		if ( returnVal > 0 )
 		{
 			size_t numChars = (size_t)returnVal;
 
