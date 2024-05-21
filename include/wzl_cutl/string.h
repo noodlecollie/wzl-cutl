@@ -163,6 +163,35 @@ WZL_CUTL_PUBLIC(bool) wzl_strequali(const char* a, const char* b);
 //   True if strings are considered equal, or false otherwise.
 WZL_CUTL_PUBLIC(bool) wzl_strnequali(const char* a, const char* b, size_t count);
 
+// Function: wzl_strtrimspace
+// Given a string, obtains pointers to the first and last non-whitespace characters.
+//
+// Whitespace is determined using the standard library's isspace() function.
+//
+// Note:
+//
+//   If either begin or end are non-null, their values will always be set regardless
+//   of whether the input string is valid or not. If the input string is null,
+//   begin and end will be set to null. If the input string is empty, begin and end
+//   will be set to point to the terminator character.
+//
+// Parameters:
+//
+//   str   - String to trim.
+//   begin - Address of begin pointer. If provided, will be set to point to
+//           the first non-whitespace character in the string. If there are no
+//           non-whitespace characters, will be set to point to the terminator.
+//   end  -  Address of end pointer. If provided, will be set to point to
+//           the character *after* the last non-whitespace character in the string.
+//           If there are no non-whitespace characters, will be set to point to
+//           the terminator.
+//
+// Returns:
+//
+//   True if the string was trimmed at all (ie. it contained any leading or
+//   trailing whitespace), or false otherwise.
+WZL_CUTL_PUBLIC(bool) wzl_strtrimspace(const char* str, const char** begin, const char** end);
+
 // Function: wzl_sprintf
 // Safer version of the standard library sprintf function,
 // which always ensures that the provided buffer is terminated.
