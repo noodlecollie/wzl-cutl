@@ -41,5 +41,16 @@ const char* wzl_get_last_library_error(void)
 
 void* wzl_get_library_symbol(void* handle, const char* symbol)
 {
+#ifndef _MSC_VER
+// No way to cast between void* and a function pointer without suppressing -pedantic...
+// Even though this is Windows, GCC might still be used here (eg. MinGW on GitHub Actions).
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
+#endif // _MSC_VER
+
 	return (void*)GetProcAddress(handle, symbol);
+
+#ifndef _MSC_VER
+#pragma GCC diagnostic pop
+#endif // _MSC_VER
 }
