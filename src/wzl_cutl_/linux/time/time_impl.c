@@ -10,5 +10,5 @@ WZL_CUTL_PUBLIC(int32_t) wzl_get_milliseconds_modulo(void)
 		return -1;
 	}
 
-	return tms.tv_nsec / 1000000;
+	return (int32_t)(tms.tv_nsec / 1000000);
 }
