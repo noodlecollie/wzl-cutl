@@ -58,10 +58,12 @@ add_library(wzl-cutl
 	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/filesystem/filesystem_impl.c>
 	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/libloader/libloader_impl.c>
 	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/string/string_impl.c>
+	$<$<PLATFORM_ID:Linux>:src/wzl_cutl_/linux/time/time_impl.c>
 
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/filesystem/filesystem_impl.c>
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/libloader/libloader_impl.c>
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/string/string_impl.c>
+	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/time/time_impl.c>
 	$<$<PLATFORM_ID:Windows>:src/wzl_cutl_/windows/winapi_min.h>
 )
 
