@@ -10,6 +10,15 @@
 #include <stdbool.h>
 #include "wzl_cutl/libexport.h"
 
+// Macro: WZL_STRINGIFY_HELPER
+// Helper for constructing string literals. Do not use
+// this macro directly, use <WZL_STRINGIFY> instead.
+#define WZL_STRINGIFY_HELPER(arg) #arg
+
+// Macro: WZL_STRINGIFY
+// Expands to a string literal form of the argument.
+#define WZL_STRINGIFY(arg) WZL_STRINGIFY_HELPER(arg)
+
 // Function: wzl_strdup
 // Given an input string, makes a dynamic copy of this string
 // and returns it. Memory is allocated according to the
