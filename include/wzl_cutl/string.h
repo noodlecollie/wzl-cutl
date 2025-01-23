@@ -10,6 +10,19 @@
 #include <stdbool.h>
 #include "wzl_cutl/libexport.h"
 
+// Macro: WZL_ATTR_FORMAT
+// Used to annotate a function to indicate that it accepts printf-style
+// arguments, which should be validated at compile time against the
+// format string.
+//
+// Note: At the moment, it's unclear what the best solution to this
+// would be for MSVC, so this is left out.
+#ifndef _MSC_VER
+#define WZL_ATTR_FORMAT(...) __attribute__((format(__VA_ARGS__)))
+#else
+#define WZL_ATTR_FORMAT(...)
+#endif
+
 // Macro: WZL_STRINGIFY_HELPER
 // Helper for constructing string literals. Do not use
 // this macro directly, use <WZL_STRINGIFY> instead.
@@ -93,7 +106,8 @@ WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const c
 //
 //   Number of characters written, excluding the null terminator,
 //   or a negative value if an error occurs.
-WZL_CUTL_PUBLIC(int) wzl_vsprintf(char* buffer, size_t bufferSize, const char* format, va_list argptr);
+WZL_CUTL_PUBLIC(int)
+wzl_vsprintf(char* buffer, size_t bufferSize, const char* format, va_list argptr) WZL_ATTR_FORMAT(printf, 3, 0);
 
 // Function: wzl_strequals
 // Performs a case-sensitive comparison between two strings.
@@ -150,7 +164,6 @@ WZL_CUTL_PUBLIC(bool) wzl_strnequals(const char* a, const char* b, size_t count)
 //
 //   True if strings are considered equal, or false otherwise.
 WZL_CUTL_PUBLIC(bool) wzl_strequali(const char* a, const char* b);
-
 
 // Function: wzl_strnequali
 // Performs a case-insensitive comparison between two strings,
@@ -226,7 +239,7 @@ WZL_CUTL_PUBLIC(bool) wzl_strtrimspace(const char* str, const char** begin, cons
 //
 //   Number of characters written, excluding the null terminator,
 //   or a negative value if an error occurs.
-static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...)
+static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...) WZL_ATTR_FORMAT(printf, 3, 4)
 {
 	va_list arglist;
 	va_start(arglist, format);
