@@ -23,6 +23,19 @@
 #define WZL_ATTR_FORMAT(...)
 #endif
 
+// Macro: WZL_ATTR_FORMAT_PRINTF
+// Helper macro for printf-style functions.
+//
+// We may need to use printf or gnu_printf, depending on the compiler.
+// For more info, see https://stackoverflow.com/a/75689271/2054335
+#if defined(__clang__)
+#define WZL_ATTR_FORMAT_PRINTF(_fmt_argnum, _first_param_num) WZL_ATTR_FORMAT(printf, _fmt_argnum, _first_param_num)
+#elif defined(__GNUC__)
+#define WZL_ATTR_FORMAT_PRINTF(_fmt_argnum, _first_param_num) WZL_ATTR_FORMAT(gnu_printf, _fmt_argnum, _first_param_num)
+#else
+#define WZL_ATTR_FORMAT_PRINTF(_fmt_num, _first_param_num)
+#endif
+
 // Macro: WZL_STRINGIFY_HELPER
 // Helper for constructing string literals. Do not use
 // this macro directly, use <WZL_STRINGIFY> instead.
@@ -107,7 +120,7 @@ WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const c
 //   Number of characters written, excluding the null terminator,
 //   or a negative value if an error occurs.
 WZL_CUTL_PUBLIC(int)
-wzl_vsprintf(char* buffer, size_t bufferSize, const char* format, va_list argptr) WZL_ATTR_FORMAT(printf, 3, 0);
+wzl_vsprintf(char* buffer, size_t bufferSize, const char* format, va_list argptr) WZL_ATTR_FORMAT_PRINTF(3, 0);
 
 // Function: wzl_strequals
 // Performs a case-sensitive comparison between two strings.
@@ -239,7 +252,7 @@ WZL_CUTL_PUBLIC(bool) wzl_strtrimspace(const char* str, const char** begin, cons
 //
 //   Number of characters written, excluding the null terminator,
 //   or a negative value if an error occurs.
-static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...) WZL_ATTR_FORMAT(printf, 3, 4);
+static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...) WZL_ATTR_FORMAT_PRINTF(3, 4);
 static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...)
 {
 	va_list arglist;
