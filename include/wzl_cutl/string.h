@@ -239,7 +239,7 @@ WZL_CUTL_PUBLIC(bool) wzl_strtrimspace(const char* str, const char** begin, cons
 //
 //   Number of characters written, excluding the null terminator,
 //   or a negative value if an error occurs.
-static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...) WZL_ATTR_FORMAT(printf, 3, 4)
+static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* format, ...)
 {
 	va_list arglist;
 	va_start(arglist, format);
@@ -248,6 +248,6 @@ static inline int wzl_sprintf(char* buffer, size_t sizeOfBuffer, const char* for
 
 	va_end(arglist);
 	return returnVal;
-}
+} WZL_ATTR_FORMAT(printf, 3, 4)
 
 #endif  // WZL_CUTL_STRING_H
