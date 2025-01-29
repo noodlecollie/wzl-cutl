@@ -44,6 +44,7 @@ add_library(wzl-cutl
 	${GENERATED_EXPORT_HEADER}
 
 	include/wzl_cutl/array.h
+	include/wzl_cutl/attributes.h
 	include/wzl_cutl/filesystem.h
 	include/wzl_cutl/libloader.h
 	include/wzl_cutl/math.h

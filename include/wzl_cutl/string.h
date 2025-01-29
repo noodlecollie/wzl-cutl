@@ -9,32 +9,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "wzl_cutl/libexport.h"
-
-// Macro: WZL_ATTR_FORMAT
-// Used to annotate a function to indicate that it accepts printf-style
-// arguments, which should be validated at compile time against the
-// format string.
-//
-// Note: At the moment, it's unclear what the best solution to this
-// would be for MSVC, so this is left out.
-#ifndef _MSC_VER
-#define WZL_ATTR_FORMAT(...) __attribute__((format(__VA_ARGS__)))
-#else
-#define WZL_ATTR_FORMAT(...)
-#endif
-
-// Macro: WZL_ATTR_FORMAT_PRINTF
-// Helper macro for printf-style functions.
-//
-// We may need to use printf or gnu_printf, depending on the compiler.
-// For more info, see https://stackoverflow.com/a/75689271/2054335
-#if defined(__clang__)
-#define WZL_ATTR_FORMAT_PRINTF(_fmt_argnum, _first_param_num) WZL_ATTR_FORMAT(printf, _fmt_argnum, _first_param_num)
-#elif defined(__GNUC__)
-#define WZL_ATTR_FORMAT_PRINTF(_fmt_argnum, _first_param_num) WZL_ATTR_FORMAT(gnu_printf, _fmt_argnum, _first_param_num)
-#else
-#define WZL_ATTR_FORMAT_PRINTF(_fmt_num, _first_param_num)
-#endif
+#include "wzl_cutl/attributes.h"
 
 // Macro: WZL_STRINGIFY_HELPER
 // Helper for constructing string literals. Do not use
