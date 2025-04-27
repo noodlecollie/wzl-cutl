@@ -33,7 +33,7 @@ typedef void (*wzl_opaque_funcptr)(void);
 //
 //   Handle to library, or NULL if the library could
 //   not be loaded.
-void* wzl_load_library(const char* filename);
+WZL_CUTL_PUBLIC(void*) wzl_load_library(const char* filename);
 
 // Function: wzl_unload_library
 // Unloads a library that has previously been loaded.
@@ -44,7 +44,7 @@ void* wzl_load_library(const char* filename);
 // Parameters:
 //
 //   handle - Handle to a previously loaded library.
-bool wzl_unload_library(void* handle);
+WZL_CUTL_PUBLIC(bool) wzl_unload_library(void* handle);
 
 // Function: wzl_get_last_library_error
 // Returns a string representing the last error that
@@ -53,7 +53,7 @@ bool wzl_unload_library(void* handle);
 // Returns:
 //
 //   Human-readable string describing the last error.
-const char* wzl_get_last_library_error(void);
+WZL_CUTL_PUBLIC(const char*) wzl_get_last_library_error(void);
 
 // Function: wzl_get_library_symbol
 // Returns a pointer to the symbol with the specified
@@ -81,7 +81,7 @@ const char* wzl_get_last_library_error(void);
 //
 //   Pointer to the requested symbol, or NULL if it could not
 //   be obtained.
-void* wzl_get_library_symbol(void* handle, const char* symbol);
+WZL_CUTL_PUBLIC(void*) wzl_get_library_symbol(void* handle, const char* symbol);
 
 // Function: wzl_get_library_function
 // Returns a pointer to the function with the specified
