@@ -64,7 +64,7 @@ WZL_CUTL_PUBLIC(char*) wzl_strdup(const char* str);
 // Returns:
 //
 //   Number of characters copied, not including the terminator.
-WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const char* restrict src);
+WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* WZL_ATTR_PARAM_RESTRICT dest, size_t destSize, const char* WZL_ATTR_PARAM_RESTRICT src);
 
 // Function: wzl_vsprintf
 // Safer version of the standard library vsprintf function,

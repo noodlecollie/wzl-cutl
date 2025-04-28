@@ -27,7 +27,7 @@ WZL_CUTL_PUBLIC(char*) wzl_strdup(const char* str)
 	return out;
 }
 
-WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const char* restrict src)
+WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* WZL_ATTR_PARAM_RESTRICT dest, size_t destSize, const char* WZL_ATTR_PARAM_RESTRICT src)
 {
 	if ( !dest || destSize < 1 )
 	{
@@ -40,7 +40,7 @@ WZL_CUTL_PUBLIC(size_t) wzl_strcpy(char* restrict dest, size_t destSize, const c
 		return 0;
 	}
 
-	char* restrict cursor = dest;
+	char* WZL_ATTR_PARAM_RESTRICT cursor = dest;
 
 	while ( *src && destSize > 1 )
 	{

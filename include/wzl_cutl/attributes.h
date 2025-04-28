@@ -47,4 +47,10 @@
 #define WZL_ATTR_NODISCARD
 #endif
 
+#ifndef __cplusplus
+#define WZL_ATTR_PARAM_RESTRICT restrict
+#else
+#define WZL_ATTR_PARAM_RESTRICT __restrict
+#endif
+
 #endif  // WZL_CUTL_ATTRIBUTES_H
