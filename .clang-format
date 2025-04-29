@@ -64,10 +64,7 @@ NamespaceIndentation: All
 PackConstructorInitializers: Never
 PointerAlignment: Left
 ReflowComments: 'true'
-
-# This must be false because include order matters in certain cases
-SortIncludes: 'false'
-
+SortIncludes: CaseSensitive
 SortUsingDeclarations: 'true'
 SpaceAfterCStyleCast: 'false'
 SpaceAfterLogicalNot: 'false'

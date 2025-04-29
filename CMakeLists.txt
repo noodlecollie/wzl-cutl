@@ -13,8 +13,13 @@ set(CMAKE_C_STANDARD_REQUIRED YES)
 set(CMAKE_POSITION_INDEPENDENT_CODE YES)
 
 option(BUILD_SHARED_LIBS "If set, builds a shared library. If not set, builds a static library." FALSE)
+option(BUILD_TESTING "If set, builds tests for the library." FALSE)
 option(CMAKE_COMPILE_WARNING_AS_ERROR "If set, any compiler warnings are treated as errors." TRUE)
 option(WZL_CUTL_INSTALL "If set, and the project is a top-level project, generates an install target for the library." FALSE)
+
+if(BUILD_TESTING)
+	enable_testing()
+endif()
 
 set(GENERATED_HEADER_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated_headers")
 set(GENERATED_EXPORT_HEADER "${GENERATED_HEADER_DIR}/wzl_cutl/libexport.h")
@@ -101,4 +106,8 @@ target_include_directories(wzl-cutl
 
 if(PROJECT_IS_TOP_LEVEL AND WZL_CUTL_INSTALL)
 	install(TARGETS wzl-cutl)
+endif()
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+	add_subdirectory(tests)
 endif()
