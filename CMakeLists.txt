@@ -108,6 +108,6 @@ if(PROJECT_IS_TOP_LEVEL AND WZL_CUTL_INSTALL)
 	install(TARGETS wzl-cutl)
 endif()
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+if(BUILD_TESTING)
 	add_subdirectory(tests)
 endif()
