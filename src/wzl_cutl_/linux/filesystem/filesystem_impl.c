@@ -1,14 +1,16 @@
+#include <dirent.h>
+#include <errno.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include <dirent.h>
 #include <unistd.h>
-#include <errno.h>
 #include "wzl_cutl/filesystem.h"
 #include "wzl_cutl/math.h"
+#include "wzl_cutl_/common/memory/memory_impl.h"
 
 WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 {
+	bool selfAllocatedBuffer = false;
 	char* out = getcwd(buffer, buffer_size);
 
 	// "As an extension to the POSIX.1-2001 standard, glibc's getcwd()
@@ -27,7 +29,8 @@ WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 			}
 
 			temp_buffer_size = WZL_MAX(temp_buffer_size * 2, PATH_MAX);
-			temp_buffer = malloc(temp_buffer_size);
+			temp_buffer = wzl_malloc_(temp_buffer_size);
+			selfAllocatedBuffer = true;
 
 			// Out should equal temp_buffer when the call succeeds.
 			out = getcwd(temp_buffer, temp_buffer_size);
@@ -37,11 +40,11 @@ WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 		if ( !out && temp_buffer )
 		{
 			// Don't leak this buffer if we failed the process.
-			free(temp_buffer);
+			wzl_free_(temp_buffer);
 		}
 	}
 
-	return out;
+	return selfAllocatedBuffer ? out : wzl_strdup_if_delegated(out);
 }
 
 WZL_CUTL_PUBLIC(bool)

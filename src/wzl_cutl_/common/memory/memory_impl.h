@@ -1,10 +1,16 @@
 #ifndef WZL_CUTL_COMMON_MEMORY_MEMORY_IMPL_H
 #define WZL_CUTL_COMMON_MEMORY_MEMORY_IMPL_H
 
+#include <stdbool.h>
 #include <stdlib.h>
 #include "wzl_cutl/memory.h"
 
 extern wzl_memory_delegates g_memory_delegates;
+
+static inline bool wzl_has_custom_malloc(void)
+{
+	return g_memory_delegates.malloc_func != NULL;
+}
 
 static inline void* wzl_malloc_(size_t size)
 {
@@ -32,6 +38,9 @@ static inline void* wzl_realloc_(void* ptr, size_t size)
 {
 	return g_memory_delegates.realloc_func ? g_memory_delegates.realloc_func(ptr, size) : realloc(ptr, size);
 }
+
+char* wzl_strdup_if_delegated(char* str);
+void* wzl_duplicate_if_delegated(void* data, size_t length);
 
 #define WZL_MALLOC_STRUCT(typeName) ((typeName)wzl_malloc_(sizeof(typeName)))
 #define WZL_CALLOC_STRUCT(typeName) ((typeName)wzl_calloc_(1, sizeof(typeName)))
