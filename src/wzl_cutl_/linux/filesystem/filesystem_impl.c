@@ -10,7 +10,7 @@
 
 WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 {
-	bool selfAllocatedBuffer = false;
+	bool self_allocated_buffer = false;
 	char* out = getcwd(buffer, buffer_size);
 
 	// "As an extension to the POSIX.1-2001 standard, glibc's getcwd()
@@ -30,7 +30,7 @@ WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 
 			temp_buffer_size = WZL_MAX(temp_buffer_size * 2, PATH_MAX);
 			temp_buffer = wzl_malloc_(temp_buffer_size);
-			selfAllocatedBuffer = true;
+			self_allocated_buffer = true;
 
 			// Out should equal temp_buffer when the call succeeds.
 			out = getcwd(temp_buffer, temp_buffer_size);
@@ -44,7 +44,48 @@ WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 		}
 	}
 
-	return selfAllocatedBuffer ? out : wzl_strdup_if_delegated(out);
+	return self_allocated_buffer ? out : wzl_strdup_if_delegated(out);
+}
+
+WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
+{
+	ssize_t result = 0;
+
+	if ( buffer )
+	{
+		result = readlink("/proc/self/exe", buffer, buffer_size);
+		return NULL;
+	}
+
+	char* temp_buffer = NULL;
+	size_t temp_buffer_size = WZL_MAX(buffer_size, 1);
+	bool wrote_successfully = false;
+
+	do
+	{
+		if ( temp_buffer )
+		{
+			free(temp_buffer);
+		}
+
+		temp_buffer_size = WZL_MAX(temp_buffer_size * 2, PATH_MAX);
+		temp_buffer = wzl_malloc_(temp_buffer_size);
+
+		result = readlink("/proc/self/exe", buffer, buffer_size);
+
+		wrote_successfully =
+			result > 0 && ((size_t)result < temp_buffer_size || temp_buffer[temp_buffer_size - 1] == '\0');
+	}
+	while ( result > 0 && (size_t)result == temp_buffer_size && temp_buffer[temp_buffer_size - 1] != '\0' &&
+			temp_buffer_size < PATH_MAX );
+
+	if ( !wrote_successfully && temp_buffer )
+	{
+		// Don't leak this buffer if we failed the process.
+		wzl_free_(temp_buffer);
+	}
+
+	return temp_buffer;
 }
 
 WZL_CUTL_PUBLIC(bool)

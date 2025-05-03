@@ -25,7 +25,7 @@ WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
 
 	char* temp_buffer = NULL;
 	DWORD temp_buffer_size = WZL_MAX(MAX_PATH / 2, 1);
-	DWORD lastError = 0;
+	DWORD last_error = 0;
 
 	do
 	{
@@ -38,11 +38,11 @@ WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
 		temp_buffer = wzl_malloc_(temp_buffer_size);
 
 		GetModuleFileNameA(NULL, temp_buffer, (DWORD)temp_buffer_size);
-		lastError = GetLastError();
+		last_error = GetLastError();
 	}
-	while ( lastError == ERROR_INSUFFICIENT_BUFFER && temp_buffer_size < MAX_ALLOC_PATH );
+	while ( last_error == ERROR_INSUFFICIENT_BUFFER && temp_buffer_size < MAX_ALLOC_PATH );
 
-	if ( lastError == ERROR_INSUFFICIENT_BUFFER )
+	if ( last_error == ERROR_INSUFFICIENT_BUFFER )
 	{
 		// Don't leak this buffer if we failed the process.
 		wzl_free_(temp_buffer);
