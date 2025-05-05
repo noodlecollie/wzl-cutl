@@ -24,7 +24,7 @@ WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
 	}
 
 	char* temp_buffer = NULL;
-	DWORD temp_buffer_size = WZL_MAX(MAX_PATH / 2, 1);
+	DWORD temp_buffer_size = 256;
 	DWORD last_error = 0;
 
 	do
@@ -34,7 +34,7 @@ WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
 			free(temp_buffer);
 		}
 
-		temp_buffer_size = WZL_MAX(temp_buffer_size * 2, MAX_ALLOC_PATH);
+		temp_buffer_size = WZL_MIN(temp_buffer_size * 2, MAX_ALLOC_PATH);
 		temp_buffer = wzl_malloc_(temp_buffer_size);
 
 		GetModuleFileNameA(NULL, temp_buffer, (DWORD)temp_buffer_size);

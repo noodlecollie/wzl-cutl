@@ -28,7 +28,7 @@ WZL_CUTL_PUBLIC(char*) wzl_get_cwd(char* buffer, size_t buffer_size)
 				free(temp_buffer);
 			}
 
-			temp_buffer_size = WZL_MAX(temp_buffer_size * 2, PATH_MAX);
+			temp_buffer_size = WZL_MIN(temp_buffer_size * 2, PATH_MAX);
 			temp_buffer = wzl_malloc_(temp_buffer_size);
 			self_allocated_buffer = true;
 
@@ -58,7 +58,7 @@ WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
 	}
 
 	char* temp_buffer = NULL;
-	size_t temp_buffer_size = WZL_MAX(buffer_size, 1);
+	size_t temp_buffer_size = 256;
 	bool wrote_successfully = false;
 
 	do
@@ -68,10 +68,10 @@ WZL_CUTL_PUBLIC(char*) wzl_get_executable_path(char* buffer, size_t buffer_size)
 			free(temp_buffer);
 		}
 
-		temp_buffer_size = WZL_MAX(temp_buffer_size * 2, PATH_MAX);
+		temp_buffer_size = WZL_MIN(temp_buffer_size * 2, PATH_MAX);
 		temp_buffer = wzl_malloc_(temp_buffer_size);
 
-		result = readlink("/proc/self/exe", buffer, buffer_size);
+		result = readlink("/proc/self/exe", temp_buffer, temp_buffer_size);
 
 		wrote_successfully =
 			result > 0 && ((size_t)result < temp_buffer_size || temp_buffer[temp_buffer_size - 1] == '\0');
