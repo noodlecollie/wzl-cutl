@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.24)
 # This directory may be added to the CMAKE_MODULE_PATH of any client
 # CMake project, to make use of the CMake helper scripts defined here.
 # These scripts are also used for building the C library itself.
-LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_public")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_public")
 
 project(wzl-cutl LANGUAGES C CXX)
 
@@ -50,6 +50,7 @@ add_library(wzl-cutl
 
 	include/wzl_cutl/array.h
 	include/wzl_cutl/attributes.h
+	include/wzl_cutl/compile_diagnostics.h
 	include/wzl_cutl/filesystem.h
 	include/wzl_cutl/libloader.h
 	include/wzl_cutl/math.h
